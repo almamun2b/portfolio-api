@@ -1,12 +1,21 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "../../config/db";
 
+const generateSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+};
+
 const createCategory = async (data: Prisma.CategoryCreateInput) => {
   if (!data.name) {
     throw new Error("Name is required");
   }
 
-  const categorySlug = data.name.toLowerCase().replace(/\s+/g, "-");
+  const categorySlug = generateSlug(data.name);
 
   const isCategoryExist = await prisma.category.findFirst({
     where: {
@@ -73,7 +82,7 @@ const updateCategory = async (id: number, data: Prisma.CategoryUpdateInput) => {
     throw new Error("Name is required");
   }
 
-  const categorySlug = (data.name as string).toLowerCase().replace(/\s+/g, "-");
+  const categorySlug = generateSlug(data.name as string);
 
   const result = await prisma.category.update({
     where: {

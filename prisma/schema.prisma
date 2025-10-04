@@ -38,7 +38,7 @@ model User {
   isVerified Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  posts      Blog[]
+  blogs      Blog[]
 }
 
 model Category {
@@ -47,7 +47,7 @@ model Category {
   slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  posts     Blog[]
+  blogs     Blog[]
 }
 
 model Blog {
