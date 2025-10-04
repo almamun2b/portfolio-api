@@ -14,6 +14,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCK
+}
+
 model User {
   id         Int        @id @default(autoincrement())
   name       String
@@ -26,31 +38,32 @@ model User {
   isVerified Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  posts      Post[]
+  posts      Blog[]
 }
 
-model Post {
-  id         Int      @id @default(autoincrement())
-  title      String
-  content    String
-  thumbnail  String?
-  isFeatured Boolean  @default(false)
-  tags       String[]
-  views      Int      @default(0)
-  authorId   Int
-  author     User     @relation(fields: [authorId], references: [id])
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Blog[]
 }
 
-enum Role {
-  SUPER_ADMIN
-  ADMIN
-  USER
-}
-
-enum UserStatus {
-  ACTIVE
-  INACTIVE
-  BLOCK
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String
+  content     String
+  image       String?
+  isFeatured  Boolean  @default(false)
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  tags        String[]
+  views       Int      @default(0)
+  authorId    Int
+  author      User     @relation(fields: [authorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
