@@ -174,6 +174,23 @@ const getFeaturedBlogs = async (req: Request, res: Response) => {
   }
 };
 
+const getTags = async (req: Request, res: Response) => {
+  try {
+    const result = await postService.getTags();
+    res.status(200).json({
+      success: true,
+      message: "Tags retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Failed to retrieve tags",
+      error,
+    });
+  }
+};
+
 export const blogController = {
   createBlog,
   getBlogs,
@@ -183,4 +200,5 @@ export const blogController = {
   getBlogStats,
   getPopularBlogs,
   getFeaturedBlogs,
+  getTags,
 };

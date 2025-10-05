@@ -195,7 +195,7 @@ const getBlogs = async ({
   });
 
   const total = await prisma.blog.count({ where });
-  const totalPage = Math.ceil(total / limit);
+  const totalPages = Math.ceil(total / limit);
 
   return {
     posts: result,
@@ -203,7 +203,7 @@ const getBlogs = async ({
       page,
       limit,
       total,
-      totalPage,
+      totalPages,
     },
   };
 };
@@ -438,6 +438,21 @@ const getFeaturedBlogs = async () => {
   return result;
 };
 
+const getTags = async () => {
+  // Get all blogs with their tags
+  const blogs = await prisma.blog.findMany({
+    select: {
+      tags: true,
+    },
+  });
+
+  const allTags = blogs.flatMap((blog) => blog.tags);
+
+  const uniqueTags = [...new Set(allTags)].sort();
+
+  return uniqueTags;
+};
+
 export const postService = {
   createBlog,
   getBlogs,
@@ -447,4 +462,5 @@ export const postService = {
   getBlogStats,
   getPopularBlogs,
   getFeaturedBlogs,
+  getTags,
 };

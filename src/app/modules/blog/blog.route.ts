@@ -9,6 +9,7 @@ router.get("/", blogController.getBlogs);
 router.get("/stats", blogController.getBlogStats);
 router.get("/popular", blogController.getPopularBlogs);
 router.get("/featured", blogController.getFeaturedBlogs);
+router.get("/tags", blogController.getTags);
 router.get("/:id", blogController.getBlogById);
 router.patch("/:id", blogController.updateBlog);
 router.delete("/:id", blogController.deleteBlog);
