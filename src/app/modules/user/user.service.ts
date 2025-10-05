@@ -61,13 +61,13 @@ const getUsers = async () => {
       isVerified: true,
       createdAt: true,
       updatedAt: true,
-      posts: false,
+      blogs: false,
     },
     orderBy: {
       createdAt: "desc",
     },
     // include: {
-    //   posts: true,
+    //   blogs: true,
     // },
   });
   return result;
@@ -89,7 +89,7 @@ const getUserById = async (id: number) => {
       isVerified: true,
       createdAt: true,
       updatedAt: true,
-      posts: true,
+      blogs: true,
     },
   });
   return result;
