@@ -13,7 +13,7 @@
     "prisma:seed": "prisma db seed",
     "prisma:reset": "prisma migrate reset",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:generate": "prisma generate"
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "Next Level Web Development",
