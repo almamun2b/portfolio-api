@@ -5,6 +5,12 @@ import { router } from "./app/routes";
 
 const app = express();
 
+// List of allowed origins
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://portfolio-mamun.vercel.app/",
+];
+
 // Middleware
 app.use(cors()); // Enables Cross-Origin Resource Sharing
 app.use(compression()); // Compresses response bodies for faster delivery
@@ -12,7 +18,15 @@ app.use(express.json()); // Parse incoming JSON requests
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
