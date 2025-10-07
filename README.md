@@ -2,6 +2,10 @@
 
 A comprehensive **Portfolio & Blog API** built with **TypeScript, Express.js, Prisma ORM, and PostgreSQL**. This RESTful API serves as the backend for a personal portfolio website, providing endpoints for managing blogs, projects, categories, users, and authentication.
 
+### Live Frontent: https://portfolio-mamun.vercel.app/
+
+### Live Backend: https://portfolio-mamun-api.vercel.app/
+
 ---
 
 ## 🚀 Features
