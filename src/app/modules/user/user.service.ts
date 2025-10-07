@@ -89,7 +89,6 @@ const getUserById = async (id: number) => {
       isVerified: true,
       createdAt: true,
       updatedAt: true,
-      blogs: true,
     },
   });
   return result;
